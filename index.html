@@ -15,7 +15,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>St. Albert AQHI</h1>
+        <h1>Edmonton AQHI</h1>
         <div id="communityAqhi" class="communityAqhi">Loading Community AQHI...</div>
         <div id="communityReadingDate" class="communityAqhi"></div>
         <div id="communityForecastToday" class="communityAqhi"></div>
@@ -51,7 +51,7 @@
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                const stalbertCommunityData = data.value.find(community => community.CommunityName === "stalbert");
+                const stalbertCommunityData = data.value.find(community => community.CommunityName === "Edmonton");
                 if (stalbertCommunityData) {
                     document.getElementById('communityAqhi').innerText = `AQHI: ${validateAQHI(stalbertCommunityData.Aqhi)}`;
                     document.getElementById('communityReadingDate').innerText = new Date(stalbertCommunityData.ReadingDate).toLocaleString();
