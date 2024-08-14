@@ -42,7 +42,7 @@
     <script>
         // Function to ensure AQHI does not exceed 10
         function validateAQHI(aqhi) {
-            return number(aqhi) > 10 ? '10+' : aqhi;
+            return Number(aqhi) > 10 ? '10+' : aqhi;
         }
 
         // Fetch Community AQHI data
@@ -186,7 +186,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchCommunityAQHI();
-            fetchStAlbertAQHI();
+            fetchstalbertAQHI();
             fetchPurpleAirData();
             fetchMcCauleyAQHI();
             fetchEastAQHI();
