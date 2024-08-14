@@ -44,6 +44,11 @@
         function validateAQHI(aqhi) {
             return Number(aqhi) > 10 ? '10+' : aqhi;
         }
+        
+        function validateForecast(forecast) {
+            return Number(forecast) > 10 ? '10+' : forecast;
+        }
+        
 
         // Fetch Community AQHI data
         async function fetchCommunityAQHI() {
@@ -55,9 +60,9 @@
                 if (edmontonCommunityData) {
                     document.getElementById('communityAqhi').innerText = `AQHI: ${validateAQHI(edmontonCommunityData.Aqhi)}`;
                     document.getElementById('communityReadingDate').innerText = new Date(edmontonCommunityData.ReadingDate).toLocaleString();
-                    document.getElementById('communityForecastToday').innerText = `Forecast Today: ${edmontonCommunityData.ForecastToday}`;
-                    document.getElementById('communityForecastTonight').innerText = `Forecast Tonight: ${edmontonCommunityData.ForecastTonight}`;
-                    document.getElementById('communityForecastTomorrow').innerText = `Forecast Tomorrow: ${edmontonCommunityData.ForecastTomorrow}`;
+                    document.getElementById('communityForecastToday').innerText = `Forecast Today: ${validateForecast(edmontonCommunityData.ForecastToday)}`;
+                    document.getElementById('communityForecastTonight').innerText = `Forecast Tonight: ${validateForecast(edmontonCommunityData.ForecastTonight)}`;
+                    document.getElementById('communityForecastTomorrow').innerText = `Forecast Tomorrow: ${validateForecast(edmontonCommunityData.ForecastTomorrow)}`;
                 }
             } catch (error) {
                 console.error('Error fetching Community AQHI data:', error);
