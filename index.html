@@ -51,20 +51,20 @@
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                const stalbertCommunityData = data.value.find(community => community.CommunityName === "Edmonton");
-                if (stalbertCommunityData) {
-                    document.getElementById('communityAqhi').innerText = `AQHI: ${validateAQHI(stalbertCommunityData.Aqhi)}`;
-                    document.getElementById('communityReadingDate').innerText = new Date(stalbertCommunityData.ReadingDate).toLocaleString();
-                    document.getElementById('communityForecastToday').innerText = `Forecast Today: ${stalbertCommunityData.ForecastToday}`;
-                    document.getElementById('communityForecastTonight').innerText = `Forecast Tonight: ${stalbertCommunityData.ForecastTonight}`;
-                    document.getElementById('communityForecastTomorrow').innerText = `Forecast Tomorrow: ${stalbertCommunityData.ForecastTomorrow}`;
+                const edmontonCommunityData = data.value.find(community => community.CommunityName === "Edmonton");
+                if (edmontonCommunityData) {
+                    document.getElementById('communityAqhi').innerText = `AQHI: ${validateAQHI(edmontonCommunityData.Aqhi)}`;
+                    document.getElementById('communityReadingDate').innerText = new Date(edmontonCommunityData.ReadingDate).toLocaleString();
+                    document.getElementById('communityForecastToday').innerText = `Forecast Today: ${edmontonCommunityData.ForecastToday}`;
+                    document.getElementById('communityForecastTonight').innerText = `Forecast Tonight: ${edmontonCommunityData.ForecastTonight}`;
+                    document.getElementById('communityForecastTomorrow').innerText = `Forecast Tomorrow: ${edmontonCommunityData.ForecastTomorrow}`;
                 }
             } catch (error) {
                 console.error('Error fetching Community AQHI data:', error);
             }
         }
 
-        // Fetch stalbert AQHI data
+        // Fetch St. Albert AQHI data
         async function fetchStAlbertAQHI() {
             const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
             try {
@@ -75,43 +75,43 @@
                     const validatedAQHI = validateAQHI(stalbertData.Aqhi);
                     document.getElementById('stalbertAqhi').innerText = `AQHI: ${validatedAQHI}`;
                     document.getElementById('stalbertReadingDate').innerText = new Date(stalbertData.ReadingDate).toLocaleString();
-                    sendToMap('stalbert', {...stalbertData, Aqhi: validatedAQHI });
+                    sendToMap('StAlbert', {...stalbertData, Aqhi: validatedAQHI });
                 }
             } catch (error) {
-                console.error('Error fetching stalbert AQHI data:', error);
+                console.error('Error fetching St. Albert AQHI data:', error);
             }
         }
 
-    // Function to fetch and send Edmonton McCauley AQHI data to the map
-    async function fetchMcCauleyAQHI() {
-        const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            const McCauleyData = data.value.find(station => station.StationName === "Edmonton McCauley");
-            if (McCauleyData) {
-                const validatedAQHI = validateAQHI(McCauleyData.Aqhi);
-                sendToMap('McCauley', {...McCauleyData, Aqhi: validatedAQHI });
+        // Function to fetch and send Edmonton McCauley AQHI data to the map
+        async function fetchMcCauleyAQHI() {
+            const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const McCauleyData = data.value.find(station => station.StationName === "Edmonton McCauley");
+                if (McCauleyData) {
+                    const validatedAQHI = validateAQHI(McCauleyData.Aqhi);
+                    sendToMap('McCauley', {...McCauleyData, Aqhi: validatedAQHI });
+                }
+            } catch (error) {
+                console.error('Error fetching McCauley AQHI data:', error);
             }
-        } catch (error) {
-            console.error('Error fetching McCauley AQHI data:', error);
         }
-    }
 
-    // Function to fetch and send Edmonton East AQHI data to the map
-    async function fetchEastAQHI() {
-        const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            const EastData = data.value.find(station => station.StationName === "Edmonton East");
-            if (EastData) {
-                const validatedAQHI = validateAQHI(EastData.Aqhi);
-                sendToMap('East', {...EastData, Aqhi: validatedAQHI });
+        // Function to fetch and send Edmonton East AQHI data to the map
+        async function fetchEastAQHI() {
+            const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const EastData = data.value.find(station => station.StationName === "Edmonton East");
+                if (EastData) {
+                    const validatedAQHI = validateAQHI(EastData.Aqhi);
+                    sendToMap('East', {...EastData, Aqhi: validatedAQHI });
+                }
+            } catch (error) {
+                console.error('Error fetching Edmonton East AQHI data:', error);
             }
-        } catch (error) {
-            console.error('Error fetching Edmonton East AQHI data:', error);
-        }
     }
 
         // Fetch and process PurpleAir data
@@ -179,14 +179,14 @@
         window.addEventListener('message', (event) => {
             if (event.data === 'ready') {
                 fetchCommunityAQHI();
-                fetchstalbertAQHI();
+                fetchStAlbertAQHI();
                 fetchPurpleAirData();
             }
         });
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchCommunityAQHI();
-            fetchstalbertAQHI();
+            fetchStAlbertAQHI();
             fetchPurpleAirData();
             fetchMcCauleyAQHI();
             fetchEastAQHI();
