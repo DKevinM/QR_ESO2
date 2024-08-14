@@ -85,11 +85,11 @@
         window.addEventListener('message', (event) => {
             const { type, data } = event.data;
             console.log(`Received from parent: ${type}`, data);  // Log the received data
-            if (type === 'St. Albert') {
+            if (type === 'StAlbert') {
                 addStationToMap(53.626969, -113.611905, data.Aqhi, "St. Albert", new Date(data.ReadingDate).toLocaleString());
-            } else if (type === 'Edmonton McCauley') {
+            } else if (type === 'McCauley') {
                 addStationToMap(53.549483, -113.485964, data.Aqhi, "Edmonton McCauley", new Date(data.ReadingDate).toLocaleString());
-            } else if (type === 'Edmonton East') {
+            } else if (type === 'East') {
                 addStationToMap(53.548008, -113.367969, data.Aqhi, "Edmonton East", new Date(data.ReadingDate).toLocaleString());
             } else if (type === 'purpleair') {
                 const sensorLocations = {
