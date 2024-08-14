@@ -82,35 +82,35 @@
             }
         }
 
-    // Function to fetch and send Leduc (Sensor) AQHI data to the map
-    async function fetchLeducAQHI() {
+    // Function to fetch and send Edmonton McCauley AQHI data to the map
+    async function fetchMcCauleyAQHI() {
         const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
         try {
             const response = await fetch(url);
             const data = await response.json();
-            const leducData = data.value.find(station => station.StationName === "Leduc Sensor");
-            if (leducData) {
-                const validatedAQHI = validateAQHI(leducData.Aqhi);
-                sendToMap('leduc', {...leducData, Aqhi: validatedAQHI });
+            const McCauleyData = data.value.find(station => station.StationName === "Edmonton McCauley");
+            if (McCauleyData) {
+                const validatedAQHI = validateAQHI(McCauleyData.Aqhi);
+                sendToMap('McCauley', {...McCauleyData, Aqhi: validatedAQHI });
             }
         } catch (error) {
-            console.error('Error fetching Leduc AQHI data:', error);
+            console.error('Error fetching McCauley AQHI data:', error);
         }
     }
 
-    // Function to fetch and send Edmonton Lendrum AQHI data to the map
-    async function fetchLendrumAQHI() {
+    // Function to fetch and send Edmonton East AQHI data to the map
+    async function fetchEastAQHI() {
         const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
         try {
             const response = await fetch(url);
             const data = await response.json();
-            const lendrumData = data.value.find(station => station.StationName === "Edmonton Lendrum");
-            if (lendrumData) {
-                const validatedAQHI = validateAQHI(lendrumData.Aqhi);
-                sendToMap('lendrum', {...lendrumData, Aqhi: validatedAQHI });
+            const EastData = data.value.find(station => station.StationName === "Edmonton East");
+            if (EastData) {
+                const validatedAQHI = validateAQHI(EastData.Aqhi);
+                sendToMap('East', {...EastData, Aqhi: validatedAQHI });
             }
         } catch (error) {
-            console.error('Error fetching Edmonton Lendrum AQHI data:', error);
+            console.error('Error fetching Edmonton East AQHI data:', error);
         }
     }
 
@@ -188,8 +188,8 @@
             fetchCommunityAQHI();
             fetchstalbertAQHI();
             fetchPurpleAirData();
-            fetchLeducAQHI();
-            fetchLendrumAQHI();
+            fetchMcCauleyAQHI();
+            fetchEastAQHI();
         });
     </script>
 </body>
