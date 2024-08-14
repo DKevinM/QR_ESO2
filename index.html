@@ -65,7 +65,7 @@
         }
 
         // Fetch stalbert AQHI data
-        async function fetchstalbertAQHI() {
+        async function fetchStAlbertAQHI() {
             const url = "https://data.environment.alberta.ca/EdwServices/aqhi/odata/StationAqhis?$format=json";
             try {
                 const response = await fetch(url);
@@ -186,7 +186,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchCommunityAQHI();
-            fetchstalbertAQHI();
+            fetchStAlbertAQHI();
             fetchPurpleAirData();
             fetchMcCauleyAQHI();
             fetchEastAQHI();
