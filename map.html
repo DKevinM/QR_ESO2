@@ -35,7 +35,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
         // Initialize the map
-        const map = L.map('map').setView([53.366737,-113.7184], 13);
+        const map = L.map('map').setView([53.617582,-113.522029], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
@@ -85,25 +85,17 @@
         window.addEventListener('message', (event) => {
             const { type, data } = event.data;
             console.log(`Received from parent: ${type}`, data);  // Log the received data
-            if (type === 'genesee') {
-                addStationToMap(53.3033, -114.2016, data.Aqhi, "Genesee", new Date(data.ReadingDate).toLocaleString());
-            } else if (type === 'leduc') {
-                addStationToMap(53.241986, -113.503280, data.Aqhi, "Leduc (Sensor)", new Date(data.ReadingDate).toLocaleString());
-            } else if (type === 'lendrum') {
-                addStationToMap(53.497784 , -113.527011, data.Aqhi, "Edmonton Lendrum", new Date(data.ReadingDate).toLocaleString());
+            if (type === 'St. Albert') {
+                addStationToMap(53.626969, -113.611905, data.Aqhi, "St. Albert", new Date(data.ReadingDate).toLocaleString());
+            } else if (type === 'Edmonton McCauley') {
+                addStationToMap(53.549483, -113.485964, data.Aqhi, "Edmonton McCauley", new Date(data.ReadingDate).toLocaleString());
+            } else if (type === 'Edmonton East') {
+                addStationToMap(53.548008, -113.367969, data.Aqhi, "Edmonton East", new Date(data.ReadingDate).toLocaleString());
             } else if (type === 'purpleair') {
                 const sensorLocations = {
                     '53321': {coords: [53.560972,-113.518603], name: 'Prince Rupert'},
                     '156805': {coords: [53.641834,-113.48319], name: 'Klarvatten'},
                     '187769': {coords: [53.631107,-113.58479], name: 'Akinsdale'}
-
-
-            Prince Rupert	53321
-            Klarvatten     156805 
-            Akinsdale	187769
-
-
-                    
                 };
 
                 // Check for ID and name match			
